@@ -1,0 +1,9 @@
+# ignore emacs temporary files
+*~
+
+# ignore ALX provided files
+*main.js
+
+# ignore node files
+node_modules/
+package-lock.json
