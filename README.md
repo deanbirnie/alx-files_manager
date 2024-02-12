@@ -13,4 +13,4 @@ The objective is to build a simple platform to upload and view files with the fo
 
 This project is largely guided with a step by step plan, however, there are some freedoms of implementation, split in more files etc... (`utils` folder)
 
-This kind of service a;ready exists in the real world. It's simply a great learning opportunity to build something practical from start to finish using commonly used technoloogies. The goal is to have a useful and useable application by the end of this project that achieves the goals outlined above.
+This kind of service already exists in the real world. It's simply a great learning opportunity to build something practical from start to finish using commonly used technologies. The goal is to have a useful and usable application by the end of this project that achieves the goals outlined above.
