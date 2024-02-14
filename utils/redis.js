@@ -5,8 +5,6 @@ class RedisClient {
   constructor() {
     this.client = redis.createClient();
 
-    this.getAsync = promisify(this.client.get).bind(this.client);
-
     this.client.on('error', (err) => {
       console.error(`Redis client cannot connect to the server: ${err.message}`);
     });
@@ -17,16 +15,18 @@ class RedisClient {
   }
 
   async get(key) {
-    return this.getAsync(key);
+    return promisify(this.client.get).bind(this.client)(key);
   }
 
   async set(key, value, duration) {
-    this.client.setex(key, value, duration);
+    await promisify(this.client.SETEX).bind(this.client)(key, duration, value);
   }
 
   async del(key) {
-    this.client.del(key);
+    await promisify(this.client.DEL).bind(this.client)(key);
   }
 }
 
-export default new RedisClient();
+const redisClient = new RedisClient();
+
+export default redisClient;
