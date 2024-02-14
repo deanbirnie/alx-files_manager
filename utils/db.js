@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import mongodb from 'mongodb';
 
 class DBClient {
   constructor() {
@@ -7,24 +7,13 @@ class DBClient {
     const database = process.env.DB_DATABASE || 'files_manager';
     const uri = `mongodb://${host}:${port}/${database}`;
 
-    this.client = new MongoClient(uri, {
-      useUnifiedTopology: true,
-    });
+    this.client = new mongodb.MongoClient(uri, {useUnifiedTopology: true});
 
-    this.isAlive = false;
-
-    this.client.connect((err) => {
-      if (err) {
-        console.error(`MongoDB connection error: ${err.message}`);
-        this.iisAlive = false;
-      } else {
-        this.isAlive = true;
-      }
-    });
+    this.client.connect();
   }
 
   isAlive() {
-    return this.isAlive;
+    return this.client.isConnected();
   }
 
   async nbUsers() {
