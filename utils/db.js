@@ -7,13 +7,13 @@ class DBClient {
     const database = process.env.DB_DATABASE || 'files_manager';
     const uri = `mongodb://${host}:${port}/${database}`;
 
-    this.client = new mongodb.MongoClient(uri);
+    this.client = new mongodb.MongoClient(uri, { useUnifiedTopology: true });
 
     this.client.connect();
   }
 
   isAlive() {
-    return this.client.isConnected();
+    return this.client.topology.isConnected();
   }
 
   async nbUsers() {
